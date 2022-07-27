@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 """
 Module 2-rectangle
 Contains class Rectangle
@@ -21,6 +21,7 @@ class Rectangle:
         height(self)
         height(self, value)
     """
+
     def __init__(self, width=0, height=0):
         """ Initialize rectangles """
         self.width = width
@@ -53,3 +54,6 @@ class Rectangle:
         if value < 0:
             raise ValueError("height must be >= 0")
         self.__height = value
+
+
+my_rect = Rectangle("otaku")
