@@ -1,31 +1,56 @@
 #!/usr/bin/python3
-"""Module 11-student
-
-Contains class(es):
-    Student
 """
-import json
+Module 11-student
+
+Contains class Student
+that initializes public instance attributes first_name, last_name, and age,
+and has public method to_json that returns dictionary representation
+of requested attributes or all if none were requested
+"""
 
 
-class Student:
+class Student():
+    """
+    Public Attributes:
+        first_name
+        last_name
+        age
+
+    Public Methods:
+        to_json: retrieves its dictionary representation
+    """
+
     def __init__(self, first_name, last_name, age):
-        """Initialize instance"""
+        """
+        Initializes student with full name and age
+        """
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-        """Return dictionary representation of instance"""
-        if attrs == None:
-            return (self.__dict__)
+        """
+        Returns dictionary description with simple data structure
+        (list, dictionary, dictionary, string)
+        for JSON serialization of an object
+
+        Return:
+            Only return dict of attrs given to us
+            Return entire dict if no attrs given
+        """
+        if attrs is None:
+            return self.__dict__
         else:
-            _dict = {}
+            dic = {}
             for att in attrs:
                 if att in self.__dict__.keys():
-                    _dict[att] = self.__dict__[att]
-            return(_dict)
+                    dic[att] = self.__dict__[att]
+            return dic
 
     def reload_from_json(self, json):
-        """Replace instance attributes with json attributes"""
-        for key, value in json.items():
-            setattr(self, key, value)
+        """
+        Return:
+            Transfer all attributes of json to self
+        """
+        for k, v in json.items():
+            setattr(self, k, v)

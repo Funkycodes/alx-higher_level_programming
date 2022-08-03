@@ -8,4 +8,4 @@ import json
 
 def class_to_json(obj):
     """Return json representation of obj"""
-    return(json.dumps(obj.__dict__))
+    return(obj.__dict__)
