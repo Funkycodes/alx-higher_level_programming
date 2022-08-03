@@ -7,5 +7,12 @@ import json
 
 
 def from_json_string(my_str):
-    """Return object"""
+    """Convert json string into python object
+
+    Args:
+        my_str (string): json string
+
+    Returns:
+        Python Object
+    """
     return (json.loads(my_str))
