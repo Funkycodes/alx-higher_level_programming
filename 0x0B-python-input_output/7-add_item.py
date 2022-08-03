@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""Module 7-add_item
+
+Script that save list rep of command line arguments to json file
+"""
 import json
 from sys import argv
 
