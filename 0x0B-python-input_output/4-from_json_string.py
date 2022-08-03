@@ -3,7 +3,6 @@
 
 Contains function that converts json string into a object representation 
 """
-import json
 
 
 def from_json_string(my_str):
@@ -15,4 +14,5 @@ def from_json_string(my_str):
     Returns:
         Python Object
     """
+    import json
     return(json.loads(my_str))
