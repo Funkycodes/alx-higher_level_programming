@@ -1,11 +1,19 @@
 #!/usr/bin/python3
-"""Module 8-class_to_json
-
-Contains function that returns json representation of class
 """
-import json
+Module 8-class_to_json
+
+Contains function that
+returns dictionary description with simple data structure
+(list, dictionary, dictionary, string)
+for JSON serialization of an object
+"""
 
 
 def class_to_json(obj):
-    """Return json representation of obj"""
-    return(obj.__dict__)
+    """Returns dictionary description with simple data structure
+       (list, dictionary, dictionary, string)
+       for JSON serialization of an object
+    Args:
+        obj: python object
+    """
+    return obj.__dict__
