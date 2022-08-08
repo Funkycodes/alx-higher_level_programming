@@ -11,7 +11,7 @@ Returns dictionary representation of attributes
 """
 
 
-from rectangle import Rectangle
+from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
