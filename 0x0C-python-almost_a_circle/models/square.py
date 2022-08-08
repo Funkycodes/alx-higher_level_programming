@@ -10,52 +10,57 @@ Updates attributes: arg1=id, arg2=size, arg3=x, arg4=y
 Returns dictionary representation of attributes
 """
 
-from models import rectangle
 
-Rectangle = rectangle.Rectangle
+from rectangle import Rectangle
 
 
 class Square(Rectangle):
+    """
+    defines class Square; inherits from class Rectangle
+    Inherited Attributes:
+        id
+        __weight        __height
+        __x             __y
+    Class Attributes:
+        size
+    Inherted Methods:
+        Base.init(self, id=None)
+        Rectangle.init(self, width, height, x=0, y=0, id=None)
+        update(self, *args, **kwargs)
+        width(self)      width(self, value)
+        height(self)     height(self, value)
+        x(self)          x(self, value)
+        y(self)          y(self, value)
+        area(self)       display(self)
+    Methods:
+        __str__
+        __init__(self, size, x=0, y=0, id=None)
+        update(self, *args, **kwargs)
+        size(self)       size(self, value)
+        to_dictionary(self)
+    """
 
     def __init__(self, size, x=0, y=0, id=None):
-        """Initialize instance
-
-        Args:
-            size (int): value of width and height of square
-            x (int, optional): Horizontal offset. Defaults to 0.
-            y (int, optional): Vertical offset. Defaults to 0.
-            id (_type_, optional): _description_. Defaults to None.
-        """
+        """Initialize"""
         super().__init__(size, size, x, y, id)
+        self.size = size
 
     @property
     def size(self):
-        """size Getter
-
-        Returns:
-            int : size of square which is represented by width or height
-        """
+        """Getter size"""
         return self.width
 
     @size.setter
     def size(self, value):
-        """setter size: Assign size to inherited variables
-
-        Args:
-            value (int): size; height and width of squares
-        """
+        """Setter size - sets width and height as size"""
         self.width = value
         self.height = value
 
     def __str__(self):
-        """Return user friendly string representation of instance
-
-        Returns:
-            String: Author defined __str__ override
-        """
-        return (
-            f"[{self.__class__.__name__}] ({self.id}) {self.x}/{self.y} - \
-{self.width}")
+        """Prints [Square] (<id>) <x>/<y> - <size>"""
+        return "[{:s}] ({:d}) {:d}/{:d} - {:d}".format(
+            self.__class__.__name__, self.id, self.x, self.y,
+            self.size)
 
     def update(self, *args, **kwargs):
         """
@@ -70,7 +75,7 @@ class Square(Rectangle):
                     self.size = v
                 elif k == 2:
                     self.x = v
-                elif k == 3:
+                else:
                     self.y = v
         else:
             if "id" in kwargs:
@@ -83,17 +88,10 @@ class Square(Rectangle):
                 self.y = kwargs["y"]
 
     def to_dictionary(self):
-        """Return dictionary representation of instance
-
-        Returns:
-            dict: dictionary with attributes and values serving as key, value
-            pairs respectively
-        """
-
-        diction = {}
-        diction['id'] = self.id
-        diction['size'] = self.size
-        diction['x'] = self.x
-        diction['y'] = self.y
-
-        return diction
+        """Return dictionary representation"""
+        d = {}
+        d["id"] = self.id
+        d["size"] = self.size
+        d["x"] = self.x
+        d["y"] = self.y
+        return d
