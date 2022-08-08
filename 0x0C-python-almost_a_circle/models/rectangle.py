@@ -6,10 +6,10 @@ Inherits from Base;
 Inits superclass' id
 Contains public attribute width, height
 Prints [Rectangle] (<id>) <x>/<y> - <width>/height
-Updates attributes: arg1=id, arg2=width, arg3=height, arg4=x, arg5=y 
+Updates attributes: arg1=id, arg2=width, arg3=height, arg4=x, arg5=y
 Returns dictionary representation of attributes
 """
-import base
+from models import base
 Base = base.Base
 
 
@@ -41,7 +41,8 @@ class Rectangle(Base):
         Base (_type_): _description_
     """
 
-    def __init__(self, width: int, height: int, x: int = 0, y: int = 0, id=None):
+    def __init__(self, width: int,
+                 height: int, x: int = 0, y: int = 0, id=None):
         """Initialize all instancd variables
         Args:
             width (int): _description_
@@ -200,31 +201,31 @@ class Rectangle(Base):
                 if k == 0:
                     self.id = v
                 elif k == 1:
-                    self.__width = v
+                    self.width = v
                 elif k == 2:
-                    self.__height = v
+                    self.height = v
                 elif k == 3:
-                    self.__x = v
-                elif k == 4:
-                    self.__y = v
+                    self.x = v
+                else:
+                    self.y = v
         else:
             for k, v in kwargs.items():
                 if k == "id":
                     self.id = v
                 elif k == "width":
-                    self.__width = v
+                    self.width = v
                 elif k == "height":
-                    self.__height = v
+                    self.height = v
                 elif k == "x":
-                    self.__x = v
+                    self.x = v
                 elif k == "y":
-                    self.__y = v
+                    self.y = v
 
     def to_dictionary(self):
         """Return dictionary representation of instance
 
         Returns:
-            dict: dictionary with attributes and values serving as key, value 
+            dict: dictionary with attributes and values serving as key, value
             pairs respectively
         """
         diction = {}

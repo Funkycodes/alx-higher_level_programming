@@ -10,7 +10,7 @@ Updates attributes: arg1=id, arg2=size, arg3=x, arg4=y
 Returns dictionary representation of attributes
 """
 
-import rectangle
+from models import rectangle
 
 Rectangle = rectangle.Rectangle
 
@@ -43,7 +43,7 @@ class Square(Rectangle):
         """setter size: Assign size to inherited variables
 
         Args:
-            value (int): size; height and width of square  
+            value (int): size; height and width of squares
         """
         self.width = value
         self.height = value
@@ -59,7 +59,10 @@ class Square(Rectangle):
 {self.width}")
 
     def update(self, *args, **kwargs):
-
+        """
+        If args: set attributes in this order: id, width, height, x, y
+        If no args given: set attributes according to kwargs
+        """
         if args:
             for k, v in enumerate(args):
                 if k == 0:
@@ -69,23 +72,22 @@ class Square(Rectangle):
                 elif k == 2:
                     self.x = v
                 elif k == 3:
-                    self.y == y
-        else:
-            for k, v in kwargs.items():
-                if k == "id":
-                    self.id = v
-                elif k == "size":
-                    self.size = v
-                elif k == "x":
-                    self.x = v
-                elif k == "y":
                     self.y = v
+        else:
+            if "id" in kwargs:
+                self.id = kwargs["id"]
+            if "size" in kwargs:
+                self.size = kwargs["size"]
+            if "x" in kwargs:
+                self.x = kwargs["x"]
+            if "y" in kwargs:
+                self.y = kwargs["y"]
 
     def to_dictionary(self):
         """Return dictionary representation of instance
 
         Returns:
-            dict: dictionary with attributes and values serving as key, value 
+            dict: dictionary with attributes and values serving as key, value
             pairs respectively
         """
 

@@ -19,14 +19,22 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        if list_dictionaries == None:
+        """Return a json representation of instance
+
+        Args:
+            list_dictionaries (dict): Dictionary form of object
+
+        Returns:
+            _type_: _description_
+        """
+        if list_dictionaries is None:
             list_dictionaries = []
         json_rep = json.dumps(list_dictionaries)
         return json_rep
 
     @staticmethod
     def from_json_string(json_string):
-        if json_string is None:
+        if json_string is None or len(json_string) == 0:
             json_string = "[]"
         return json.loads(json_string)
 
