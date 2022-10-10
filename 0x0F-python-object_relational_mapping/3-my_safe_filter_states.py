@@ -1,30 +1,17 @@
 #!/usr/bin/python3
-"""
-return matching states; safe from MySQL injections
-# http://bobby-tables.com/python
-parameters given to script: username, password, database, state to match
-"""
-
+"""  lists all states from the database hbtn_0e_0_usa """
 import MySQLdb
-from sys import argv
+import sys
+
 
 if __name__ == "__main__":
-
-    # connect to database
-    db = MySQLdb.connect(host="localhost",
-                         port=3306,
-                         user=argv[1],
-                         passwd=argv[2],
-                         db=argv[3])
-
-    # create cursor to exec queries using SQL; match arg given
-    cursor = db.cursor()
-    sql_cmd = """SELECT *
-                 FROM states
-                 WHERE name=%s ORDER BY id ASC"""
-    cursor.execute(sql_cmd, (argv[4],))
-
-    for row in cursor.fetchall():
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
+    cur = db.cursor()
+    match = sys.argv[4]
+    cur.execute("SELECT * FROM states WHERE name LIKE %s", (match, ))
+    rows = cur.fetchall()
+    for row in rows:
         print(row)
-    cursor.close()
+    cur.close()
     db.close()

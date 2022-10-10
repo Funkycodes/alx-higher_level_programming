@@ -1,29 +1,17 @@
 #!/usr/bin/python3
-"""
-return matching states
-parameters given to script: username, password, database, state to match
-"""
-
+"""  lists all states from the database hbtn_0e_0_usa """
 import MySQLdb
-from sys import argv
+import sys
+
 
 if __name__ == "__main__":
-
-    # connect to database
-    db = MySQLdb.connect(host="localhost",
-                         port=3306,
-                         user=argv[1],
-                         passwd=argv[2],
-                         db=argv[3])
-
-    # create cursor to exec queries using SQL; match arg given
-    cursor = db.cursor()
-    sql_cmd = """SELECT *
-                 FROM states
-                 WHERE name LIKE '{:s}' ORDER BY id ASC""".format(argv[4])
-    cursor.execute(sql_cmd)
-    for row in cursor.fetchall():
-        if row[1] == argv[4]:
-            print(row)
-    cursor.close()
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY '{}'"
+                .format(sys.argv[4]))
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+    cur.close()
     db.close()

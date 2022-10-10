@@ -1,32 +1,18 @@
 #!/usr/bin/python3
-"""
-return cities that are in the state given (tables 'cities' 'states)
-parameters given to script: username, password, database, state
-"""
-
+"""  lists all states from the database hbtn_0e_0_usa """
 import MySQLdb
-from sys import argv
+import sys
+
 
 if __name__ == "__main__":
-
-    # connect to database
-    db = MySQLdb.connect(host="localhost",
-                         port=3306,
-                         user=argv[1],
-                         passwd=argv[2],
-                         db=argv[3])
-
-    # create cursor to exec queries using SQL; join two tables for all info
-    cursor = db.cursor()
-    sql_cmd = """SELECT cities.name
-                 FROM states
-                 INNER JOIN cities ON states.id = cities.state_id
-                 WHERE states.name LIKE %s
-                 ORDER BY cities.id ASC"""
-    cursor.execute(sql_cmd, (argv[4], ))
-
-    # format the printing of cities of same state separated by commas
-    print(', '.join(["{:s}".format(row[0]) for row in cursor.fetchall()]))
-
-    cursor.close()
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
+    cur = db.cursor()
+    cur.execute("""SELECT cities.name FROM
+                cities INNER JOIN states ON states.id=cities.state_id
+                WHERE states.name=%s""", (sys.argv[4],))
+    rows = cur.fetchall()
+    tmp = list(row[0] for row in rows)
+    print(*tmp, sep=", ")
+    cur.close()
     db.close()
