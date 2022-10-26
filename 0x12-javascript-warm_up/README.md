@@ -1,1 +1,1 @@
-0x12-javascript-warm_up
+readme file for javascript directory

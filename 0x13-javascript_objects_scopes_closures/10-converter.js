@@ -1,7 +1,2 @@
 #!/usr/bin/node
-exports.converter = function (base) {
-  function conv (number) {
-    return number.toString(base);
-  }
-  return conv;
-};
+exports.converter = function (base) { return num => num.toString(base); };
