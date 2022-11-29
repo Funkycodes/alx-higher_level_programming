@@ -1,12 +1,15 @@
 #!/usr/bin/node
-
-let url = process.argv[2];
+/**
+ * a script that display the status code of a GET request.
+ * first argument is the URL to request (GET)
+ */
+const myArgs = process.argv.slice(2);
 const request = require('request');
-
-request(url, function (err, response) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('code: ' + response.statusCode);
-  }
-});
+request
+  .get(myArgs[0])
+  .on('response', function (response) {
+    console.log(`code: ${response.statusCode}`);
+  })
+  .on('error', error => {
+    console.log(error);
+  });
