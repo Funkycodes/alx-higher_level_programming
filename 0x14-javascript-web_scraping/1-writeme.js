@@ -1,17 +1,11 @@
 #!/usr/bin/node
-/**
- * reads and prints the content of a file
- * first argument is the file path
- */
-const myArgs = process.argv.slice(2);
+
 const fs = require('fs');
-fs.writeFile(myArgs[0], myArgs[1],
-  {
-    encoding: 'utf-8',
-    flag: 'w'
-  },
-  (error) => {
-    if (error) {
-      console.log(error);
-    }
-  });
+const args = process.argv;
+const content = Buffer.from(args[3], 'utf-8').toString();
+
+fs.writeFile(args[2], content, err => {
+  if (err) {
+    console.error(err);
+  }
+});

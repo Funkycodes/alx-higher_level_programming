@@ -1,14 +1,13 @@
 #!/usr/bin/node
-/**
- * reads and prints the content of a file
- * first argument is the file path
- */
-const myArgs = process.argv.slice(2);
+
+/* File System Object */
 const fs = require('fs');
-fs.readFile(myArgs[0], 'utf8', (error, data) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(data);
-  }
-});
+const args = process.argv;
+
+/* Read File */
+fs.readFile(args[2], bar);
+
+function bar (err, data) {
+  /* If an error exists, show it, otherwise show the file */
+  err ? console.log(err) : console.log(String(data));
+}
